@@ -1,0 +1,30 @@
+{
+    "name": "koenigseggposche/yii2-oss",
+    "type": "library",
+    "description": "Aliyun OSS library for Yii2 framework",
+    "keywords": [
+        "yii2",
+        "Aliyun",
+        "OSS",
+        "yii2-oss",
+        "widget"
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "koenigseggposche",
+            "email": "koenigseggposche@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : "~5.5|~7.0",
+        "aliyuncs/oss-sdk-php": "~2.0",
+        "yiisoft/yii2-bootstrap": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "koenigseggposche\\yii2-oss\\": ""
+        }
+    }
+}
