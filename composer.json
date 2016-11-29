@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "koenigseggposche\\yii2-oss\\": ""
+            "koenigseggposche\\yii2oss\\": ""
         }
     }
 }
