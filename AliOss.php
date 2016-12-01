@@ -14,7 +14,7 @@ class AliOss extends Component
     public $AccessKeySecret = '';
     public $domain = '';
     public $imageHost = '';
-    public $endPoint = 'http://oss-cn-beijing.aliyuncs.com';
+    public $endPoint = '';
 
     private $client;
     public function init()
@@ -55,7 +55,7 @@ class AliOss extends Component
     public function uploadData($content, $object = null, $prefix = null, $bucket = null)
     {
         try {
-            if (is_null($object)) {
+            if (empty($object)) {
                 $object = date('YmdHis') . mb_substr(md5($content), -8);
             }
             $prefix = $prefix ?: $this->prefix;
