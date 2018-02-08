@@ -34,7 +34,7 @@ class AliOss extends Component
      * @param null $bucket
      * @param null $prefix
      */
-    public function uploadFile($path, $object = null, $prefix = null, $bucket = null)
+    public function uploadFile($path, $object = null, $prefix = null, $bucket = null, $options = null)
     {
         try {
             $content = file_get_contents($path);
@@ -42,7 +42,7 @@ class AliOss extends Component
             Yii::error($e->getMessage());
             throw $e;
         }
-        return $this->uploadData($content, $object, $prefix, $bucket);
+        return $this->uploadData($content, $object, $prefix, $bucket, $options);
     }
 
     /**
@@ -52,7 +52,7 @@ class AliOss extends Component
      * @param null $prefix
      * @param null $bucket
      */
-    public function uploadData($content, $object = null, $prefix = null, $bucket = null)
+    public function uploadData($content, $object = null, $prefix = null, $bucket = null, $options = null)
     {
         try {
             if (empty($object)) {
@@ -61,7 +61,7 @@ class AliOss extends Component
             $prefix = $prefix ?: $this->prefix;
             $bucket = $bucket ?: $this->bucket;
             $object = $prefix ? "$prefix/$object" : $object;
-            return $this->client->putObject($bucket, $object, $content);
+            return $this->client->putObject($bucket, $object, $content, $options);
         } catch (OssException $e) {
             Yii::error($e->getErrorCode() . ': ' . $e->getMessage());
             throw $e;
@@ -78,13 +78,13 @@ class AliOss extends Component
      * @param null $bucket
      * @throws OssException
      */
-    public function delete($object, $prefix = null, $bucket = null)
+    public function delete($object, $prefix = null, $bucket = null, $options = null)
     {
         try {
             $prefix = $prefix ?: $this->prefix;
             $bucket = $bucket ?: $this->bucket;
             $object = $prefix ? "$prefix/$object" : $object;
-            $this->client->deleteObject($bucket, $object);
+            $this->client->deleteObject($bucket, $object, $options);
         } catch (OssException $e) {
             Yii::error($e->getErrorCode() . ': ' . $e->getMessage());
             throw $e;
@@ -99,13 +99,13 @@ class AliOss extends Component
      * @return string
      * @throws OssException
      */
-    public function downloadData($object, $prefix = null, $bucket = null)
+    public function downloadData($object, $prefix = null, $bucket = null, $options = null)
     {
         try {
             $prefix = $prefix ?: $this->prefix;
             $bucket = $bucket ?: $this->bucket;
             $object = $prefix ? "$prefix/$object" : $object;
-            return $this->client->getObject($bucket, $object);
+            return $this->client->getObject($bucket, $object, $options);
         } catch (OssException $e) {
             Yii::error($e->getErrorCode() . ': ' . $e->getMessage());
             throw $e;
